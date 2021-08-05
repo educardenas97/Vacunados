@@ -2,7 +2,7 @@
 Un proyecto que busca mejorar el acceso a los registros de vacunación
 
 **Frontend**
-![index](main.jpg)
+![Index](main.jpg)
 
 # Ejecución
 Se necesita NodeJS y MongoDB para ejecutar la API. 
@@ -19,9 +19,9 @@ El archivo se encuentra en el directorio ./backend/core
 
 
 ## Arquitectura
-
+![Arquitectura](arquitectura.jpg)
 ```mermaid
-graph LR
+stateDiagram-v2
 A[Frontend] -- Fetch --> B((API - Express))
 B -- JSON --> A
 C -- Array --> B
