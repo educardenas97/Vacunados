@@ -1,37 +1,23 @@
-const {MongoClient} = require('mongodb');
+exports.find = async function find(cedula) {
+  // Get librares
+  const {MongoClient} = require('mongodb');
+  const uri = 'mongodb://127.0.0.1:27017';
+  const client = new MongoClient(uri);
+  
+  let allValues;
+  try {
+    // Connect to the database
+    await client.connect();
+    collection = await client.db("vacunados").collection("vacunados");;
+    // Get all the documents from the collection
+    allValues = await collection.find({cedula: parseInt(cedula)})
+      .project({_id: 0})
+      .sort({fecha_aplicacion: 1})
+      .toArray();
+  } catch (err) {
+    console.error(err);
+  }
 
-async function listDatabases(client){
-    databasesList = await client.db().admin().listDatabases();
- 
-    console.log("Databases:");
-    databasesList.databases.forEach(db => console.log(` - ${db.name}`));
-};
- 
+  return allValues;
 
-
-async function main(){
-    /**
-     * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
-     * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
-     */
-    const uri = 'mongodb://127.0.0.1:27017';
- 
-
-    const client = new MongoClient(uri);
- 
-    try {
-        // Connect to the MongoDB cluster
-        await client.connect();
- 
-        // Make the appropriate DB calls
-        await  listDatabases(client);
- 
-    } catch (e) {
-        console.error(e);
-    } finally {
-        await client.close();
-    }
 }
-
-main().catch(console.error);
-
