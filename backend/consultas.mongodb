@@ -1,0 +1,22 @@
+// MongoDB Playground
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+// The current database to use.
+use('vacunados');
+
+// Search for documents in the current collection.
+db.getCollection('vacunados')
+  .find(
+    {
+	nombre: { 
+		$regex: '^ARIEL'
+	}, 
+	apellido:{ 
+		$regex: '^SAMUDIO'
+	}, 
+	cedula: {$lt: 3000000},  
+	fecha_aplicacion: {
+		$gte: ISODate('2021-07-01T04:00:00.000+00:00'), 
+		$lt: ISODate('2021-07-28T04:00:00.000+00:00')
+	}
+  });
