@@ -75,4 +75,3 @@ async function getDataOfAPI(cedula) {
     }
 
 }
-
