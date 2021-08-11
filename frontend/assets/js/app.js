@@ -1,7 +1,7 @@
 function validateForm() {
   let x = document.forms["form"]["cedula"].value;
   if (x == "") {
-    alert("Ingresar un número de identifiación");
+    alert("Ingresar un número de cedula o documento");
     return false;
   }else{
       setData();
