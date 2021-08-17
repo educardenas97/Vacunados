@@ -65,7 +65,7 @@ async function getDataOfAPI(cedula) {
 
     //Request the data from the API
     try {
-        let res = await fetch('http://localhost:3000/cedula?' + new URLSearchParams({
+        let res = await fetch('https://api-vacununados.herokuapp.com/cedula?' + new URLSearchParams({
             cedula: cedula
         }, requestOptions));
         json = await res.json();
