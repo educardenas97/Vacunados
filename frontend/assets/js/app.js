@@ -20,15 +20,15 @@ async function setData() {
 
 
     data.forEach(async element => {
-        drawElement(
-            titleCase(element.nombre + " " + element.apellido)
-        );
-        drawElement("Dosis: " + element.dosis);
         //Parse iso date string to a javascript date object
         const date = new Date(element.fecha_aplicacion);
         drawElement("Fecha: " + date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear());
+        drawElement(
+            titleCase(element.nombre + " " + element.apellido)
+        );
         drawElement("Lugar: " + element.establecimiento);
         drawElement("Vacuna: " + element.descripcion_vacuna);
+        drawElement("Dosis: " + element.dosis);
         drawElement(" ", "br");
     });
 
