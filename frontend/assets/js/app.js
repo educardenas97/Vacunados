@@ -1,12 +1,7 @@
 function validateForm() {
     let x = document.forms["form"]["cedula"].value;
-    try {
-        x = parseInt(x)
-    } catch (error) {
-        alert("Ingresar un número de cedula o documento");
-    }
-
-    if (x == "") {
+    
+    if (x > 0 || isNaN(x)) {
         alert("Ingresar un número de cedula o documento");
         return false;
     }else{
