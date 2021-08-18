@@ -1,11 +1,17 @@
 function validateForm() {
-  let x = document.forms["form"]["cedula"].value;
-  if (x == "" || (typeof(x) != "number")) {
-    alert("Ingresar un número de cedula o documento");
-    return false;
-  }else{
-      setData();
-  }
+    let x = document.forms["form"]["cedula"].value;
+    try {
+        x = parseInt(x)
+    } catch (error) {
+        alert("Ingresar un número de cedula o documento");
+    }
+
+    if (x == "") {
+        alert("Ingresar un número de cedula o documento");
+        return false;
+    }else{
+        setData();
+    }
 }
 
 async function setData() {
