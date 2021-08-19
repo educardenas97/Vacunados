@@ -12,6 +12,9 @@ async function setData() {
     // select the target element
     data = await getDataOfAPI(document.forms["form"]["cedula"].value);
     console.log(data);
+    if (data.length == 0) {
+        drawElement("No se encontró ningún dato");
+    }
 
     const list = document.getElementById("result");
     while (list.hasChildNodes()) {  
