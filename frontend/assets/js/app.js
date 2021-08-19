@@ -10,32 +10,34 @@ function validateForm() {
 }
 
 async function setData() {
-    // select the target element
-    data = await getDataOfAPI(document.forms["form"]["cedula"].value);
-    console.log(data);
-    if (data.length == 0) {
-        drawElement("No se encontró ningún dato");
-    }
-
+    //Select the target element
     const list = document.getElementById("result");
     while (list.hasChildNodes()) {  
         list.removeChild(list.firstChild);
     }
+    
+    //Get data from API
+    data = await getDataOfAPI(document.forms["form"]["cedula"].value);
+    console.log(data);
 
-
-    data.forEach(async element => {
-        //Parse iso date string to a javascript date object
-        const date = new Date(element.fecha_aplicacion);
-        drawElement("Fecha: " + date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear());
-        drawElement(
-            titleCase(element.nombre + " " + element.apellido)
-        );
-        drawElement("Lugar: " + element.establecimiento);
-        drawElement("Vacuna: " + element.descripcion_vacuna);
-        drawElement("Dosis: " + element.dosis);
-        drawElement(" ", "br");
-    });
-
+    if (data.length == 0) {
+        //If the data is empty, draw a message
+        drawElement("No se encontró ningún dato");
+    }else{
+        //Draw elements in the document
+        data.forEach(async element => {
+            //Parse iso date string to a javascript date object
+            const date = new Date(element.fecha_aplicacion);
+            drawElement("Fecha: " + date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear());
+            drawElement(
+                titleCase(element.nombre + " " + element.apellido)
+            );
+            drawElement("Lugar: " + element.establecimiento);
+            drawElement("Vacuna: " + element.descripcion_vacuna);
+            drawElement("Dosis: " + element.dosis);
+            drawElement(" ", "br");
+        });
+    }
 }
 
 
