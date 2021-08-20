@@ -22,7 +22,7 @@ async function setData() {
 
     if (data.length == 0) {
         //If the data is empty, draw a message
-        drawElement("No se encontró ningún dato");
+        drawElement("No se encontró ningún registro");
     }else{
         //Draw elements in the document
         data.forEach(async element => {
