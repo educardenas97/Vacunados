@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^4.0.1"
+  },
+  "name": "vacunados",
+  "version": "1.0.0",
+  "description": "Un proyecto que busca mejorar el acceso a los registros de vacunación",
+  "main": "./backend/core/index.js",
+  "scripts": {
+    "start": "node ./backend/core/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/educardenas97/Vacunados.git"
+  },
+  "author": "Eduardo Gomez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/educardenas97/Vacunados/issues"
+  },
+  "homepage": "https://educardenas97.github.io/Vacunados/"
+}
