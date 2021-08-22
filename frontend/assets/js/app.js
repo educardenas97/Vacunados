@@ -8,7 +8,7 @@ async function wakeUpServer(){
 wakeUpServer().then(
     result => console.log(result)
 ).catch(
-    console.error('Server not responding')
+    error => console.error(error)
 );
 
 function validateForm() {
