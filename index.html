@@ -79,9 +79,13 @@
 	<script src="frontend/assets/js/main.js"></script>
 	<script>
 		function myFunction() {
-			alert("Banco: Atlas\nNro Cuenta: 1241932 \nCI: 4659580 \nNombre: Eduardo David Gómez Cárdenas");
+				alert("Banco: Atlas\nNro Cuenta: 1241932 \nCI: 4659580 \nNombre: Eduardo David Gómez Cárdenas");
 		}
-		console.log(await wakeUpServer());
+
+		async function wakeUp() {
+			return await wakeUpServer();
+		}
+		console.log(wakeUp());
 	</script>
 </body>
 
