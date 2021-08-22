@@ -2,6 +2,7 @@
 async function wakeUpServer(){
     data_cluster0 = await getDataOfAPI(4659580);
     data_cluster1 = await getDataOfAPI(1855725);
+    drawElement("Última actualización: " + data_cluster0[0].actualizado_al, "sup");
     return (data_cluster0.length || data_cluster1.length) === 0 ? 'Server error' : 'Server Ready'
 }
 

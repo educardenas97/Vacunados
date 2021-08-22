@@ -12,7 +12,7 @@ exports.find = async function find(cedula, cluster) {
     collection = await client.db("vacunados").collection("vacunados");;
     // Get all the documents from the collection
     allValues = await collection.find({cedula: parseInt(cedula)})
-      .project({_id: 0, actualizado_al: 0})
+      .project({_id: 0})
       .sort({fecha_aplicacion: 1})
       .toArray();
   } catch (err) {
