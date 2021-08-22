@@ -41,7 +41,7 @@ async function setData() {
     }else{
         //Draw elements in the document
         data.forEach(async element => {
-                drawElement("Fecha" + extractDate(element.fecha_aplicacion));
+                drawElement("Fecha: " + extractDate(element.fecha_aplicacion));
                 drawElement(titleCase(element.nombre + " " + element.apellido));
                 drawElement("Lugar: " + element.establecimiento);
                 drawElement("Vacuna: " + element.descripcion_vacuna);
