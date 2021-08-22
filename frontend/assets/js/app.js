@@ -5,6 +5,11 @@ async function wakeUpServer(){
     return (data_cluster0.length || data_cluster1.length) === 0 ? 'Server error' : 'Server Ready'
 }
 
+wakeUpServer().then(
+    result => console.log(result)
+).catch(
+    console.error('Server not responding')
+);
 
 function validateForm() {
     let x = document.forms["form"]["cedula"].value;
@@ -84,7 +89,7 @@ async function getDataOfAPI(cedula) {
         json = await res.json();
         return json;
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 
 }
