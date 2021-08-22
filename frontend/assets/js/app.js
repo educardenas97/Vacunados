@@ -2,13 +2,13 @@
 async function wakeUpServer(){
     data_cluster0 = await getDataOfAPI(4659580);
     data_cluster1 = await getDataOfAPI(1855725);
-    drawElement("Última actualización: " + data_cluster0[0].actualizado_al, "sup");
-    return (data_cluster0.length || data_cluster1.length) === 0 ? 'Server error' : 'Server Ready'
+    return data_cluster0;
 }
 
 wakeUpServer().then(
     result => {
-        console.log(result)
+        console.log('Server is awake');
+        drawElement(extractDate(result.fecha_aplicacion), "sub", "last_update");
         changeButtonStatus(true)
     }
 ).catch(
@@ -41,12 +41,8 @@ async function setData() {
     }else{
         //Draw elements in the document
         data.forEach(async element => {
-            //Parse iso date string to a javascript date object
-            const date = new Date(element.fecha_aplicacion);
-            drawElement("Fecha: " + date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear());
-            drawElement(
-                titleCase(element.nombre + " " + element.apellido)
-                );
+                drawElement(extractDate(element.fecha_aplicacion));
+                drawElement(titleCase(element.nombre + " " + element.apellido));
                 drawElement("Lugar: " + element.establecimiento);
                 drawElement("Vacuna: " + element.descripcion_vacuna);
                 drawElement("Dosis: " + element.dosis);
@@ -55,7 +51,13 @@ async function setData() {
             return true;
         }
 }
-    
+
+//Extract the year, month and day from a date string
+function extractDate(dateString) {
+    const date = new Date(dateString);
+    return "Fecha: " + date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+}
+
 
 //Get data from API
 async function getDataOfAPI(cedula) {
@@ -89,10 +91,10 @@ function clearResult() {
 }
 
 //Draw elements in the document
-function drawElement(element, tag="li") {
+function drawElement(element, tag="li", id="result") {
     let new_element = document.createElement(tag);
     new_element.innerHTML = element;
-    document.getElementById("result").appendChild(new_element);
+    document.getElementById(id).appendChild(new_element);
 }
 
 
