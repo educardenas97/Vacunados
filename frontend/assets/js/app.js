@@ -18,37 +18,36 @@ function validateForm() {
 }
 
 async function setData() {
-    // select the target element
-    data = await getDataOfAPI(document.forms["form"]["cedula"].value);
-    console.log(data);
-
+    //Select the target element
     const list = document.getElementById("result");
     while (list.hasChildNodes()) {  
         list.removeChild(list.firstChild);
     }
+    
+    //Get data from API
+    data = await getDataOfAPI(document.forms["form"]["cedula"].value);
+    console.log(data);
 
-
-    data.forEach(async element => {
-        //Parse iso date string to a javascript date object
-        const date = new Date(element.fecha_aplicacion);
-        drawElement("Fecha: " + date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear());
-        drawElement(
-            titleCase(element.nombre + " " + element.apellido)
-        );
-        drawElement("Lugar: " + element.establecimiento);
-        drawElement("Vacuna: " + element.descripcion_vacuna);
-        drawElement("Dosis: " + element.dosis);
-        drawElement(" ", "br");
-    });
-
+    if (data.length == 0) {
+        //If the data is empty, draw a message
+        drawElement("No se encontró ningún registro");
+    }else{
+        //Draw elements in the document
+        data.forEach(async element => {
+            //Parse iso date string to a javascript date object
+            const date = new Date(element.fecha_aplicacion);
+            drawElement("Fecha: " + date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear());
+            drawElement(
+                titleCase(element.nombre + " " + element.apellido)
+            );
+            drawElement("Lugar: " + element.establecimiento);
+            drawElement("Vacuna: " + element.descripcion_vacuna);
+            drawElement("Dosis: " + element.dosis);
+            drawElement(" ", "br");
+        });
+    }
 }
 
-//Function to wake up server in Heroku and MongoDB Atlas
-async function wakeUpServer(){
-    data_cluster0 = await getDataOfAPI(4659580);
-    data_cluster1 = await getDataOfAPI(1855725);
-    return (data_cluster0.length || data_cluster1.length) === 0 ? 'Server error' : 'Server Ready'
-}
 
 
 //Draw elements in the document
