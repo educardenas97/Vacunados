@@ -23,6 +23,7 @@ async function validateForm() {
         alert("Ingresar un número de cedula o documento");
         return false;
     }else{
+        clearResult();
         changeButtonStatus(false);
         await setData();
         changeButtonStatus(true);
@@ -31,17 +32,9 @@ async function validateForm() {
 
 
 async function setData() {
-    //Select the target element
-    const list = document.getElementById("result");
-    while (list.hasChildNodes()) {  
-        list.removeChild(list.firstChild);
-    }
-    
-    //Get data from API
     data = await getDataOfAPI(document.forms["form"]["cedula"].value);
     
     if (data.length == 0) {
-        //If the data is empty, draw a message
         drawElement("No se encontró ningún registro");
         return true;
     }else{
@@ -62,9 +55,6 @@ async function setData() {
         }
 }
     
-    
-
-
 
 //Get data from API
 async function getDataOfAPI(cedula) {
@@ -89,12 +79,19 @@ async function getDataOfAPI(cedula) {
     }    
 }    
 
+//Erase all elements in the result space
+function clearResult() {
+    const list = document.getElementById("result");
+    while (list.hasChildNodes()) {  
+        list.removeChild(list.firstChild);
+    }
+}
 
 //Draw elements in the document
 function drawElement(element, tag="li") {
-let new_element = document.createElement(tag);
-new_element.innerHTML = element;
-document.getElementById("result").appendChild(new_element);
+    let new_element = document.createElement(tag);
+    new_element.innerHTML = element;
+    document.getElementById("result").appendChild(new_element);
 }
 
 
