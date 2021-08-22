@@ -8,7 +8,7 @@ async function wakeUpServer(){
 wakeUpServer().then(
     result => {
         console.log('Server is awake');
-        drawElement(extractDate(result[0].actualizado_al), "sub", "last_update");
+        drawElement("Última actualización: " + extractDate(result[0].actualizado_al), "sub", "last_update");
         changeButtonStatus(true)
     }
 ).catch(
@@ -31,7 +31,7 @@ async function validateForm() {
     }
 }
 
-
+// Implement a function to set the data in API
 async function setData() {
     data = await getDataOfAPI(document.forms["form"]["cedula"].value);
     
@@ -41,7 +41,7 @@ async function setData() {
     }else{
         //Draw elements in the document
         data.forEach(async element => {
-                drawElement(extractDate(element.fecha_aplicacion));
+                drawElement("Fecha" + extractDate(element.fecha_aplicacion));
                 drawElement(titleCase(element.nombre + " " + element.apellido));
                 drawElement("Lugar: " + element.establecimiento);
                 drawElement("Vacuna: " + element.descripcion_vacuna);
@@ -55,7 +55,7 @@ async function setData() {
 //Extract the year, month and day from a date string
 function extractDate(dateString) {
     const date = new Date(dateString);
-    return "Fecha: " + date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+    return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
 }
 
 
