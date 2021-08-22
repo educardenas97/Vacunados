@@ -6,21 +6,29 @@ async function wakeUpServer(){
 }
 
 wakeUpServer().then(
-    result => console.log(result)
+    result => {
+        console.log(result)
+        changeButtonStatus(true)
+    }
 ).catch(
     error => console.error(error)
 );
 
-function validateForm() {
+
+// Form validation
+async function validateForm() {
     let x = document.forms["form"]["cedula"].value;
     
     if (isNaN(x) || x < 0) {
         alert("Ingresar un número de cedula o documento");
         return false;
     }else{
-        setData();
+        changeButtonStatus(false);
+        await setData();
+        changeButtonStatus(true);
     }
 }
+
 
 async function setData() {
     //Select the target element
@@ -31,10 +39,11 @@ async function setData() {
     
     //Get data from API
     data = await getDataOfAPI(document.forms["form"]["cedula"].value);
-
+    
     if (data.length == 0) {
         //If the data is empty, draw a message
         drawElement("No se encontró ningún registro");
+        return true;
     }else{
         //Draw elements in the document
         data.forEach(async element => {
@@ -43,31 +52,18 @@ async function setData() {
             drawElement("Fecha: " + date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear());
             drawElement(
                 titleCase(element.nombre + " " + element.apellido)
-            );
-            drawElement("Lugar: " + element.establecimiento);
-            drawElement("Vacuna: " + element.descripcion_vacuna);
-            drawElement("Dosis: " + element.dosis);
-            drawElement(" ", "br");
-        });
-    }
+                );
+                drawElement("Lugar: " + element.establecimiento);
+                drawElement("Vacuna: " + element.descripcion_vacuna);
+                drawElement("Dosis: " + element.dosis);
+                drawElement(" ", "br");
+            });
+            return true;
+        }
 }
+    
+    
 
-
-
-//Draw elements in the document
-function drawElement(element, tag="li") {
-    let new_element = document.createElement(tag);
-    new_element.innerHTML = element;
-    document.getElementById("result").appendChild(new_element);
-}
-
-
-//Parse string to title case
-function titleCase(str) {
-    return str.toLowerCase().split(' ').map(function(word) {
-        return word.replace(word[0], word[0].toUpperCase());
-    }).join(' ');
-} 
 
 
 //Get data from API
@@ -76,11 +72,11 @@ async function getDataOfAPI(cedula) {
     myHeaders.append("Content-Type", "application/json");
     //Request options for the API
     let requestOptions = {
-    method: 'GET',
-    headers: myHeaders,
-    redirect: 'follow'
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
     };
-
+    
     //Request the data from the API
     try {
         let res = await fetch('https://api-vacununados.herokuapp.com/cedula?' + new URLSearchParams({
@@ -90,6 +86,33 @@ async function getDataOfAPI(cedula) {
         return json;
     } catch (error) {
         console.error(error);
-    }
+    }    
+}    
 
+
+//Draw elements in the document
+function drawElement(element, tag="li") {
+let new_element = document.createElement(tag);
+new_element.innerHTML = element;
+document.getElementById("result").appendChild(new_element);
 }
+
+
+//Parse string to title case
+function titleCase(str) {
+    return str.toLowerCase().split(' ').map(function(word) {
+        return word.replace(word[0], word[0].toUpperCase());
+    }).join(' ');    
+}     
+
+// Implement a function to change the button status
+// Argument : boolean
+// true : Enable the button
+// false : Disable the button
+function changeButtonStatus(status) {
+    if (status) {
+        document.getElementById("submit").className = "primary";
+    } else {
+        document.getElementById("submit").className = "primary disabled";
+    }    
+}    
