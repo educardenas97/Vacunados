@@ -1,7 +1,7 @@
 //Function to wake up server in Heroku and MongoDB Atlas
 async function wakeUpServer(){
-    data_cluster0 = await getDataOfAPI(4659580);
-    data_cluster1 = await getDataOfAPI(1855725);
+    data_cluster0 = await getDataOfAPI(4000000);
+    data_cluster1 = await getDataOfAPI(1000000);
     return data_cluster0;
 }
 
