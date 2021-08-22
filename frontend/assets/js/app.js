@@ -26,7 +26,6 @@ async function setData() {
     
     //Get data from API
     data = await getDataOfAPI(document.forms["form"]["cedula"].value);
-    console.log(data);
 
     if (data.length == 0) {
         //If the data is empty, draw a message
