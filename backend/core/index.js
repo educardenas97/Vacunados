@@ -28,7 +28,7 @@ app.get('/cedula', async function(req, res){
         'Content-Type': 'application/json'
     });
     // Getting the data
-    const response = await find.find(req.query.cedula, req.query.cedula < 4000000 ? 1 : 0);
+    const response = await find.find(req.query.cedula, req.query.cedula < 4050000 ? 1 : 0);
     console.log(response);
     // Sending the response
     res.json(response);
