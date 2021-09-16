@@ -10,8 +10,8 @@ class MongoDB:
 
     def drop_all(self, collection):
         c = self.client[collection]
-        drop_data = c.delete_many({})
-        return drop_data.deleted_count
+        c.delete_many({})
+        return True
 
     def insert_many(self, collection, docs):
         return self.client[collection].insert_many(docs)
