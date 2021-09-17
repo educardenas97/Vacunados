@@ -6,7 +6,7 @@ async function wakeUpServer(){
 wakeUpServer().then(
     result => {
         console.log('Server is awake');
-        drawElement("Última actualización: " + extractDate(result[0].actualizado_al), "sub", "last_update");
+        drawElement("Última actualización: " + extractDate(result.actualizado_al), "sub", "last_update");
         changeButtonStatus(true)
     }
 ).catch(
