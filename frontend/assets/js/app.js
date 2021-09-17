@@ -6,7 +6,7 @@ async function wakeUpServer(){
 wakeUpServer().then(
     result => {
         console.log('Server is awake');
-        drawElement("Última actualización: " + extractDate(result[0].actualizado_al), "sub", "last_update");
+        drawElement("Última actualización: " + extractDate(result.actualizado_al), "sub", "last_update");
         changeButtonStatus(true)
     }
 ).catch(
@@ -70,7 +70,7 @@ async function getDataOfAPI(request, cedula=null) {
     
     //Request the data from the API
     try {
-        let res = await fetch('https://api-vacununados.herokuapp.com/'+ request + '?' + new URLSearchParams({
+        let res = await fetch('http://localhost:3000/'+ request + '?' + new URLSearchParams({
             cedula: cedula
         }, requestOptions));
         json = await res.json();

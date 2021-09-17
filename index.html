@@ -21,17 +21,19 @@
 			<p>Una manera rápida de ver <br />
 				tu registro de vacunación
 			<ul class="actions">
-				<li><a href="https://www.vacunate.gov.py/index-listado-vacunados.html" target="_blank"
-						class="button primary icon solid fa-download">Descargar</a></li>
-				<li><a href="#two" class="button icon solid fa-chevron-down scrolly">Consultar</a></li>
+				<li><a href="#three"
+						class="button primary icon solid fa-chevron-down scrolly">Buscador (beta)</a></li>
+				<li><a href="#two" class="button icon solid fa-search">Consultar</a></li>
 			</ul>
 		</div>
 	</header>
 
 	<!-- Two -->
-	<section id="two" class="wrapper">
+	<!--<section id="two" class="wrapper">
 		<div class="inner">
-			<h2>Consultar registros</h2>
+			<header class="major">
+				<h2>Consultas</h2>
+			</header>
 			<ul id="result">
 			</ul>
 			<form action="#" id="form" onsubmit="return false">
@@ -49,11 +51,52 @@
 				</div>
 			</form>
 		</div>
+	</section>-->
+	<section id="three" class="wrapper">
+		<div class="inner">
+			<header class="major">
+				<h2>Buscador</h2>
+			</header>
+			<ul id="result">
+			</ul>
+			<form action="#" id="form" onsubmit="return false">
+				<div class="row gtr-uniform">
+					<div class="col-12">
+						<h3>Nombre</h3>
+						<p>
+							<input type="text" name="nombre" id="nombre" value="" placeholder="Fulano Sultano" />
+							<div class="col-6 col-12-small">
+								<input type="checkbox" id="isFirstName" name="isFirstName" checked>
+								<label for="isFirstName">Es el primer nombre</label>
+							</div>
+						</p>
+						<h3>Apellido</h3>
+						<p>
+							<input type="text" name="apellido" id="apellido" value="" placeholder="Gonza" />
+							<div class="col-6 col-12-small">
+								<input type="checkbox" id="isFirstLastName" name="isFirstLastName" checked>
+								<label for="isFirstLastName">Es el primer apellido</label>
+							</div>
+						</p>
+						<h3>Edad</h3>
+						<input type="text" name="edad" id="edad" value="" placeholder="45" />
+						<div id="last_update"></div>
+						<sub>*Esta sección se encuentra en fase de pruebas</sub>
+					</div>
+					<div class="col-12">
+						<ul class="actions">
+							<li><input type="submit" id="submit" value="Buscar" class="primary disabled" onclick=validateForm()>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</form>
+		</div>
 	</section>
-
-
-
-
+	
+	
+	
+	
 	<!-- Footer -->
 	<footer id="footer">
 		<ul class="icons">
