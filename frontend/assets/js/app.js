@@ -1,9 +1,6 @@
 //Function to wake up server in Heroku and MongoDB Atlas
 async function wakeUpServer(){
-    data_cluster1 = await getDataOfAPI(4659582);
-    data_cluster2 = await getDataOfAPI(1000000);
-    data_cluster3 = await getDataOfAPI(6000000);
-    return data_cluster1;
+    return await getDataOfAPI('wakeUp');
 }
 
 wakeUpServer().then(
@@ -34,7 +31,7 @@ async function validateForm() {
 
 // Implement a function to set the data in API
 async function setData() {
-    data = await getDataOfAPI(document.forms["form"]["cedula"].value);
+    data = await getDataOfAPI('cedula', document.forms["form"]["cedula"].value);
     
     if (data.length == 0) {
         drawElement("No se encontró ningún registro");
@@ -61,7 +58,7 @@ function extractDate(dateString) {
 
 
 //Get data from API
-async function getDataOfAPI(cedula) {
+async function getDataOfAPI(request, cedula=null) {
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     //Request options for the API
@@ -73,7 +70,7 @@ async function getDataOfAPI(cedula) {
     
     //Request the data from the API
     try {
-        let res = await fetch('https://api-vacununados.herokuapp.com/cedula?' + new URLSearchParams({
+        let res = await fetch('https://api-vacununados.herokuapp.com/'+ request + '?' + new URLSearchParams({
             cedula: cedula
         }, requestOptions));
         json = await res.json();

@@ -1,20 +1,8 @@
-let find = require('./database.js');
+let controller_class = require('./controller.js');
 var express = require('express');
 var app = express();
 var PORT = 3000;
-
-// MongoDB cluster connection
-function set_cluster(cedula) {
-    if (cedula < 3000000)
-        //cluster 1
-        return 'mongodb+srv://admin:admin@cluster1.clwqv.mongodb.net/vacunados?retryWrites=true&w=majority';
-    else if ((cedula >= 3000000) && (cedula < 5000000))
-        //cluster 2
-        return 'mongodb+srv://cluster2:cluster2@cluster2.pehss.mongodb.net/vacunados?retryWrites=true&w=majority';
-    else if (cedula >= 5000000) 
-        //cluster 3
-        return 'mongodb+srv://cluster3:cluster3@cluster3.p51yy.mongodb.net/vacunados?retryWrites=true&w=majority' ;
-}
+let controller = new controller_class.controller();
 
 //Setting up the server
 app.set('port', process.env.PORT || PORT);
@@ -34,6 +22,17 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.get('/wakeUp', async function (req, res){
+    // Setting the response
+    res.set({
+        'Content-Type': 'application/json'
+    });
+
+    const response = await controller.wakeUp();
+    res.json(response);
+    res.end();
+});
+
 // Without middleware
 app.get('/cedula', async function(req, res){
     // Setting the response
@@ -41,8 +40,7 @@ app.get('/cedula', async function(req, res){
         'Content-Type': 'application/json'
     });
     // Getting the data
-    const response = await find.find(req.query.cedula, set_cluster(req.query.cedula));
-    console.log(response);
+    const response = await controller.getDocument(req.query.cedula);
     // Sending the response
     res.json(response);
     res.end();
