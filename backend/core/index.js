@@ -22,7 +22,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/wakeUp', async function (req, res){
+app.get('/wakeUp', async (req, res) => {
     // Setting the response
     res.set({
         'Content-Type': 'application/json'
@@ -34,17 +34,37 @@ app.get('/wakeUp', async function (req, res){
 });
 
 // Without middleware
-app.get('/cedula', async function(req, res){
+app.get('/cedula', async (req, res) => {
     // Setting the response
     res.set({
         'Content-Type': 'application/json'
     });
-    // Getting the data
+
     const response = await controller.getDocument(req.query.cedula);
     // Sending the response
     res.json(response);
     res.end();
 });
+
+app.get('/search', async (req, res) => {
+    // Setting the response
+    res.set({
+        'Content-Type': 'application/json'
+    });
+
+    console.log(req.query);
+
+    const response = await controller.searchDocument(
+        req.query.nombre, 
+        req.query.apellido, 
+        req.query.isFirstName === 'true', 
+        req.query.isLastName === 'true'
+    );
+    console.log(response.length);
+    // Sending the response
+    res.json(response);
+    res.end();
+})
 
 // Loop
 app.listen(app.get('port'), function(err){

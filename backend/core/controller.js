@@ -23,26 +23,26 @@ exports.controller = class Controller {
         }
     }
 
-    async getDocuments(nombre, apellido, isFirstName=true, isLastName=true) {
+    async searchDocument(nombre, apellido, isFirstName=true, isLastName=true) {
         if (isFirstName && isLastName) {
             return await this.dao.findDocuments(
-                '^' + nombre.upperCase(),
-                '^' + apellido.upperCase()
+                '^' + nombre.toUpperCase(),
+                '^' + apellido.toUpperCase()
                 );
         }else if (isFirstName && !isLastName) {
             return await this.dao.findDocuments(
-                '^' + nombre.upperCase(),
-                apellido.upperCase()
+                '^' + nombre.toUpperCase(),
+                apellido.toUpperCase()
             );
         }else if (!isFirstName && isLastName) {
             return await this.dao.findDocuments(
-                nombre.upperCase(),
-                '^' + apellido.upperCase()
+                nombre.toUpperCase(),
+                '^' + apellido.toUpperCase()
             );
         } else {
             return await this.dao.findDocuments(
-                nombre.upperCase(),
-                apellido.upperCase()
+                nombre.toUpperCase(),
+                apellido.toUpperCase()
             );
         }
     }
