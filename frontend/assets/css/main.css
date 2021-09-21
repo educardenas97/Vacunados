@@ -2676,6 +2676,9 @@ input, select, textarea {
 	}
 
 /* Section/Article */
+	section.hidden {
+		display: none;
+	}
 
 	section.special, article.special {
 		text-align: center;

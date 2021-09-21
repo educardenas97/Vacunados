@@ -21,15 +21,15 @@
 			<p>Una manera rápida de ver <br />
 				tu registro de vacunación
 			<ul class="actions">
-				<li><a href="#three"
+				<li><a href="#search_section" id="search_section_button"
 						class="button primary icon solid fa-chevron-down scrolly">Buscador (beta)</a></li>
-				<li><a href="#two" class="button icon solid fa-search">Consultar</a></li>
+				<li><a href="#id_section" id="id_section_button" class="button icon solid fa-search">Consultar</a></li>
 			</ul>
 		</div>
 	</header>
 
 	<!-- Two -->
-	<!--<section id="two" class="wrapper">
+	<section id="id_section" class="wrapper hidden">
 		<div class="inner">
 			<header class="major">
 				<h2>Consultas</h2>
@@ -45,14 +45,14 @@
 					</div>
 					<div class="col-12">
 						<ul class="actions">
-							<li><input type="submit" id="submit" value="Buscar" class="primary disabled" onclick=validateForm()></li>
+							<li><input type="submit" id="id_submit_button" value="Buscar" class="primary disabled" onclick=validateForm()></li>
 						</ul>
 					</div>
 				</div>
 			</form>
 		</div>
-	</section>-->
-	<section id="three" class="wrapper">
+	</section>
+	<section id="search_section" class="wrapper">
 		<div class="inner">
 			<header class="major">
 				<h2>Buscador</h2>
@@ -85,7 +85,7 @@
 					</div>
 					<div class="col-12">
 						<ul class="actions">
-							<li><input type="submit" id="submit" value="Buscar" class="primary disabled" onclick=validateForm()>
+							<li><input type="submit" id="search_submit_button" value="Buscar" class="primary disabled" onclick=validateForm()>
 							</li>
 						</ul>
 					</div>
@@ -115,6 +115,7 @@
 	<!-- Scripts -->
 	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
 	<script src="assets/js/app.js"></script>
+	<script type="module" src="src/app.js"></script>
 	<script src="src/model/prediction.js"></script>
 
 	<!-- Scripts -->

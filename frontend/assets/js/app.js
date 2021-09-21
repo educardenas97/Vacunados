@@ -109,8 +109,8 @@ function titleCase(str) {
 // false : Disable the button
 function changeButtonStatus(status) {
     if (status) {
-        document.getElementById("submit").className = "primary";
+        document.getElementById("search_submit_button").className = "primary enable";
     } else {
-        document.getElementById("submit").className = "primary disabled";
+        document.getElementById("search_submit_button").className = "primary disabled";
     }    
 }    
