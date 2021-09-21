@@ -13,14 +13,14 @@ export class Section {
         this.className += ' hidden';
         const element = document.getElementById(this.id);
         element.className = this.className;
-        this.buttons.forEach(button => button.switchStatus());
+        this.buttons[0].switchStatus();
     }
 
     show() {
         this.className = this.className.replace('hidden', '');
         const element = document.getElementById(this.id);
         element.className = this.className;
-        this.buttons.forEach(button => button.switchStatus());
+        this.buttons[0].switchStatus();
     }
 
 }
