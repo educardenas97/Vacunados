@@ -14,10 +14,10 @@ let api = new VacunadosApi('http://localhost:3000/');
 api.wakeUp().then((data) => {
     idSection.submitButton.enable()
     searchSection.submitButton.enable()
-    console.log(data);
 });
 
 idSection.submitButton.getElement().addEventListener('click', async () => {
+    clearResult('result')
     let data = loadIdForm();
     idSection.submitButton.disable();
     let res = await api.getDocument(data.cedula)
@@ -26,17 +26,31 @@ idSection.submitButton.getElement().addEventListener('click', async () => {
 });
 
 searchSection.submitButton.getElement().addEventListener('click', async () => {
+    clearResult('search_result')
     let dataForm = loadSearchForm();
-    console.log(dataForm);
     searchSection.submitButton.disable();
     let res = await api.searchDocuments(dataForm);
-    res.forEach(element => {
-        let prediction = predict(Number(element.cedula));
-        prediction.then((data) => {
-            let year = 2021 - dataForm.age;
-            if((year - data) < 7) console.log(element);
-        });
-    });
-
+    let filteredData = await filterData(res, dataForm.age);
+    viewPrediction(filteredData);
     searchSection.submitButton.enable();
 });
+
+async function filterData (data, age) {
+    let filteredData = [];
+    for (let i = 0; i < data.length; i++) {
+        // Call TensorFlow model
+        let prediction = await predict(data[i].cedula);
+        const year = (new Date().getFullYear()) - age;
+        if (year - prediction < 10) 
+            filteredData.push(data[i]);
+    }
+    return filteredData;
+}
+
+//Erase all elements in the result space
+function clearResult(id) {
+    const list = document.getElementById(id);
+    while (list.hasChildNodes()) {  
+        list.removeChild(list.firstChild);
+    }
+}
