@@ -53,7 +53,7 @@ app.get('/search', async (req, res) => {
     });
 
     console.log(req.query);
-
+    console.log(req.query.isFirstName == 'true')
     const response = await controller.searchDocument(
         req.query.nombre, 
         req.query.apellido, 

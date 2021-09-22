@@ -2,25 +2,26 @@ export class Section {
     constructor(id, className) {
         this.id = id;
         this.className = className;
-        this.buttons = [];
+        this.headButton = null;
+        this.submitButton = null;
     }
 
     addButton(button) {
-        this.buttons.push(button);
+        this.headButton = button;
     }
 
     hide() {
         this.className += ' hidden';
         const element = document.getElementById(this.id);
         element.className = this.className;
-        this.buttons[0].switchStatus();
+        this.headButton.switchStatus();
     }
 
     show() {
         this.className = this.className.replace('hidden', '');
         const element = document.getElementById(this.id);
         element.className = this.className;
-        this.buttons[0].switchStatus();
+        this.headButton.switchStatus();
     }
 
 }

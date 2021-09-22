@@ -10,39 +10,53 @@ function loadElements(sectionName, headerButtonName, submitButtonName) {
     const submitButtonElement = document.getElementById(submitButtonName);
     
     let section = new Section(sectionElement.id, sectionElement.className);
+
     let headerButton = new HeaderButton(
         headerButtonElement.id,
         headerButtonElement.innerHTML, 
         headerButtonElement.className,
         headerButtonElement.className.includes("primary") === true
-        );
+    );
+
     let submitButton = new SubmitButton(
         submitButtonElement.id,
-        headerButtonElement.value,
+        submitButtonElement.value,
         submitButtonElement.className,
         submitButtonElement.className.includes("enable") === true
-        );
-            
-    section.addButton(headerButton);
-    section.addButton(submitButton);
-            
+    );
+    
+    section.submitButton = submitButton;
+    section.headButton = headerButton;
+
     return section;
 }
-        
-        
-let idSection = loadElements(
-    "id_section", 
-    "id_section_button", 
-    "id_submit_button"
-    );
-
-let searchSection = loadElements(
-    "search_section", 
-    "search_section_button", 
-    "search_submit_button"
-    );
 
 
+export function loadSearchForm(){
+    const searchForm = document.forms["searchForm"];
+    let data = {
+        "nombre": searchForm["name"].value,
+        "apellido": searchForm["last_name"].value,
+        "isFistName": searchForm["isFirstName"].checked,
+        "isLastName": searchForm["isFirstLastName"].checked,
+        "age": searchForm["age"].value
+    };
+    
+    return data;
+}
+
+export function loadIdForm(){
+    const idForm = document.forms["form"];
+    let data = {
+        "cedula": idForm["cedula"].value
+    };
+    
+    return data;
+}
+
+
+let idSection = loadElements("id_section", "id_section_button", "id_submit_button");
+let searchSection = loadElements("search_section", "search_section_button", "search_submit_button");
 eventSectionClick(idSection, searchSection);
 
 export { idSection, searchSection };

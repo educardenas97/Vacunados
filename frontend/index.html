@@ -45,7 +45,7 @@
 					</div>
 					<div class="col-12">
 						<ul class="actions">
-							<li><input type="submit" id="id_submit_button" value="Buscar" class="primary disabled" onclick=validateForm()></li>
+							<li><input type="submit" id="id_submit_button" value="Buscar" class="primary disabled"></li>
 						</ul>
 					</div>
 				</div>
@@ -59,33 +59,33 @@
 			</header>
 			<ul id="result">
 			</ul>
-			<form action="#" id="form" onsubmit="return false">
+			<form action="#" id="searchForm" onsubmit="return false">
 				<div class="row gtr-uniform">
 					<div class="col-12">
 						<h3>Nombre</h3>
 						<p>
-							<input type="text" name="nombre" id="nombre" value="" placeholder="Fulano Sultano" />
+							<input type="text" name="name" id="name" value="" placeholder="Fulano Sultano" />
 							<div class="col-6 col-12-small">
-								<input type="checkbox" id="isFirstName" name="isFirstName" checked>
+								<input type="checkbox" id="isFirstName" name="isFirstName" value="true" checked>
 								<label for="isFirstName">Es el primer nombre</label>
 							</div>
 						</p>
 						<h3>Apellido</h3>
 						<p>
-							<input type="text" name="apellido" id="apellido" value="" placeholder="Gonza" />
+							<input type="text" name="last_name" id="last_name" value="" placeholder="Gonza" />
 							<div class="col-6 col-12-small">
-								<input type="checkbox" id="isFirstLastName" name="isFirstLastName" checked>
+								<input type="checkbox" id="isFirstLastName" name="isFirstLastName" value="true" checked>
 								<label for="isFirstLastName">Es el primer apellido</label>
 							</div>
 						</p>
 						<h3>Edad</h3>
-						<input type="text" name="edad" id="edad" value="" placeholder="45" />
+						<input type="text" name="age" id="age" value="" placeholder="45" />
 						<div id="last_update"></div>
 						<sub>*Esta sección se encuentra en fase de pruebas</sub>
 					</div>
 					<div class="col-12">
 						<ul class="actions">
-							<li><input type="submit" id="search_submit_button" value="Buscar" class="primary disabled" onclick=validateForm()>
+							<li><input type="submit" id="search_submit_button" value="Buscar" class="primary disabled">
 							</li>
 						</ul>
 					</div>
@@ -114,9 +114,8 @@
 
 	<!-- Scripts -->
 	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
-	<script src="assets/js/app.js"></script>
+	<!-- <script src="assets/js/app.js"></script> -->
 	<script type="module" src="src/controller/app.js"></script>
-	<script src="src/model/prediction.js"></script>
 
 	<!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>

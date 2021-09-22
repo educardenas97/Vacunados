@@ -16,7 +16,7 @@ class Api {
 
         //Request the data from the API
         let res = await fetch(this.url + url + '?' + new URLSearchParams(data, requestOptions));
-        json = await res.json();
+        let json = await res.json();
         return json;
     }
 }
