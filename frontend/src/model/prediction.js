@@ -6,7 +6,7 @@ function normalize(value) {
 
 
 async function predict(value) {
-    let model = await tf.loadLayersModel('src/model/model.json');
+    let model = await tf.loadLayersModel('frontend/src/model/model.json');
     const normalized = normalize(value);
     let data = tf.tensor([normalized]);
     const pred = await model.predict(data);

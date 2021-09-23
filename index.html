@@ -21,15 +21,15 @@
 			<p>Una manera rápida de ver <br />
 				tu registro de vacunación
 			<ul class="actions">
-				<li><a href="#three"
-						class="button primary icon solid fa-chevron-down scrolly">Buscador (beta)</a></li>
-				<li><a href="#two" class="button icon solid fa-search">Consultar</a></li>
+				<li><a href="#search_section" id="search_section_button"
+						class="button primary icon solid fa-chevron-down scrolly">Buscador*</a></li>
+				<li><a href="#id_section" id="id_section_button" class="button icon solid fa-search">Consultar</a></li>
 			</ul>
 		</div>
 	</header>
 
 	<!-- Two -->
-	<!--<section id="two" class="wrapper">
+	<section id="id_section" class="wrapper hidden">
 		<div class="inner">
 			<header class="major">
 				<h2>Consultas</h2>
@@ -45,47 +45,46 @@
 					</div>
 					<div class="col-12">
 						<ul class="actions">
-							<li><input type="submit" id="submit" value="Buscar" class="primary disabled" onclick=validateForm()></li>
+							<li><input type="submit" id="id_submit_button" value="Buscar" class="primary disabled"></li>
 						</ul>
 					</div>
 				</div>
 			</form>
 		</div>
-	</section>-->
-	<section id="three" class="wrapper">
+	</section>
+	<section id="search_section" class="wrapper">
 		<div class="inner">
 			<header class="major">
 				<h2>Buscador</h2>
 			</header>
-			<ul id="result">
-			</ul>
-			<form action="#" id="form" onsubmit="return false">
+			<ul id="search_result"></ul>
+			<form action="#" id="searchForm" onsubmit="return false">
 				<div class="row gtr-uniform">
 					<div class="col-12">
 						<h3>Nombre</h3>
 						<p>
-							<input type="text" name="nombre" id="nombre" value="" placeholder="Fulano Sultano" />
-							<div class="col-6 col-12-small">
-								<input type="checkbox" id="isFirstName" name="isFirstName" checked>
-								<label for="isFirstName">Es el primer nombre</label>
-							</div>
+							<input type="text" name="name" id="name" value="" placeholder="Fulano Sultano" />
+						<div class="col-6 col-12-small">
+							<input type="checkbox" id="isFirstName" name="isFirstName" value="true" checked>
+							<label for="isFirstName">Es el primer nombre</label>
+						</div>
 						</p>
 						<h3>Apellido</h3>
 						<p>
-							<input type="text" name="apellido" id="apellido" value="" placeholder="Gonza" />
-							<div class="col-6 col-12-small">
-								<input type="checkbox" id="isFirstLastName" name="isFirstLastName" checked>
-								<label for="isFirstLastName">Es el primer apellido</label>
-							</div>
+							<input type="text" name="last_name" id="last_name" value="" placeholder="Gonza" />
+						<div class="col-6 col-12-small">
+							<input type="checkbox" id="isFirstLastName" name="isFirstLastName" value="true" checked>
+							<label for="isFirstLastName">Es el primer apellido</label>
+						</div>
 						</p>
 						<h3>Edad</h3>
-						<input type="text" name="edad" id="edad" value="" placeholder="45" />
+						<input type="text" name="age" id="age" value="" placeholder="45" />
 						<div id="last_update"></div>
 						<sub>*Esta sección se encuentra en fase de pruebas</sub>
 					</div>
 					<div class="col-12">
 						<ul class="actions">
-							<li><input type="submit" id="submit" value="Buscar" class="primary disabled" onclick=validateForm()>
+							<li><input type="submit" id="search_submit_button" value="Buscar" class="primary disabled">
 							</li>
 						</ul>
 					</div>
@@ -93,10 +92,10 @@
 			</form>
 		</div>
 	</section>
-	
-	
-	
-	
+
+
+
+
 	<!-- Footer -->
 	<footer id="footer">
 		<ul class="icons">
@@ -113,16 +112,20 @@
 	</footer>
 
 	<!-- Scripts -->
-	<script src="frontend/assets/js/app.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+	<!-- <script src="frontend/assets/js/app.js"></script> -->
+	<script type="module" src="frontend/src/controller/app.js"></script>
+
 	<!-- Scripts -->
 	<script src="frontend/assets/js/jquery.min.js"></script>
 	<script src="frontend/assets/js/browser.min.js"></script>
 	<script src="frontend/assets/js/breakpoints.min.js"></script>
 	<script src="frontend/assets/js/util.js"></script>
 	<script src="frontend/assets/js/main.js"></script>
+
 	<script>
 		function myFunction() {
-				alert("Banco: Atlas\nNro Cuenta: 1241932 \nCI: 4659580 \nNombre: Eduardo David Gómez Cárdenas");
+			alert("Banco: Atlas\nNro Cuenta: 1241932 \nCI: 4659580 \nNombre: Eduardo David Gómez Cárdenas");
 		}
 	</script>
 </body>
