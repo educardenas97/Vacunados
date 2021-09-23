@@ -21,9 +21,6 @@ exports.dao = class DAO {
     }
 
     async findDocument(cedula) {
-        // Dev purpose
-        return await this.clusters[0].findDocument(cedula);
-
         if (cedula < 3000000)
             //cluster 1
             return await this.clusters[0].findDocument(cedula);
