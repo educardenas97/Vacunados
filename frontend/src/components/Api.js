@@ -10,7 +10,6 @@ class Api {
         //Request options for the API
         let requestOptions = {
             method: method,
-            mode: 'no-cors',
             headers: myHeaders,
             redirect: 'follow'
         };        

@@ -9,8 +9,9 @@ app.set('port', process.env.PORT || PORT);
 
 
 app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     // website you wish to  allow to connet    
-    res.setHeader('Access-Control-Allow-Origin','https://educardenas97.github.io');
+    //res.setHeader('Access-Control-Allow-Origin','https://educardenas97.github.io');
     // request method you wish to allow
     res.setHeader('Access-Control-Allow-Methods','GET, POST, OPTION, PUT, PATCH');
     // request headers you wish to allow 
