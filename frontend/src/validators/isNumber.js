@@ -1,6 +1,4 @@
-export function isNumber(formName){
-    let x = document.forms[formName]["cedula"].value;
-    
+export function isNumber(x){
     if (isNaN(x) || x < 0) {
         alert("Ingresar un número de cedula o documento");
         return false;

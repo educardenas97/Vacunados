@@ -53,12 +53,12 @@ app.get('/search', async (req, res) => {
     });
 
     console.log(req.query);
-    console.log(req.query.isFirstName == 'true')
+    
     const response = await controller.searchDocument(
         req.query.nombre, 
         req.query.apellido, 
-        true, 
-        true
+        req.query.isFirstName === 'true' ? true : false, 
+        req.query.isLastName === 'true' ? true : false
     );
     console.log(response.length);
     // Sending the response

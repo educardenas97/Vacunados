@@ -3,7 +3,6 @@ import { Section } from "../components/Section.js";
 import { eventSectionClick } from "../events/sectionClick.js";
 
 
-
 function loadElements(sectionName, headerButtonName, submitButtonName) {
     const sectionElement = document.getElementById(sectionName);
     const headerButtonElement = document.getElementById(headerButtonName);
@@ -37,11 +36,10 @@ export function loadSearchForm(){
     let data = {
         "nombre": searchForm["name"].value,
         "apellido": searchForm["last_name"].value,
-        "isFistName": searchForm["isFirstName"].checked,
+        "isFirstName": searchForm["isFirstName"].checked,
         "isLastName": searchForm["isFirstLastName"].checked,
         "age": searchForm["age"].value
     };
-    
     return data;
 }
 

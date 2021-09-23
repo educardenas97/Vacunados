@@ -1,7 +1,8 @@
 import { VacunadosApi } from "../components/Api.js";
 import { predict } from "../model/prediction.js";
 import { viewPrediction } from "../view/searchView.js";
-
+import { viewResult } from "../view/idView.js";
+import { isNumber } from "../validators/isNumber.js";
 import {
     loadIdForm, 
     loadSearchForm, 
@@ -11,28 +12,34 @@ import {
 
 
 let api = new VacunadosApi('http://localhost:3000/');
-api.wakeUp().then((data) => {
+api.wakeUp().then(() => {
     idSection.submitButton.enable()
     searchSection.submitButton.enable()
+}).catch(() => {
+    alert('Error al conectar con el servidor');
 });
 
 idSection.submitButton.getElement().addEventListener('click', async () => {
     clearResult('result')
     let data = loadIdForm();
-    idSection.submitButton.disable();
-    let res = await api.getDocument(data.cedula)
-    console.log(res);
-    idSection.submitButton.enable();
+    if (isNumber(data.cedula)) {    
+        idSection.submitButton.disable();
+        let res = await api.getDocument(data.cedula)
+        viewResult(res);
+        idSection.submitButton.enable();
+    }
 });
 
 searchSection.submitButton.getElement().addEventListener('click', async () => {
     clearResult('search_result')
     let dataForm = loadSearchForm();
-    searchSection.submitButton.disable();
-    let res = await api.searchDocuments(dataForm);
-    let filteredData = await filterData(res, dataForm.age);
-    viewPrediction(filteredData);
-    searchSection.submitButton.enable();
+    if (isNumber(dataForm.age)) {   
+        searchSection.submitButton.disable();
+        let res = await api.searchDocuments(dataForm);
+        let filteredData = await filterData(res, dataForm.age);
+        viewPrediction(filteredData);
+        searchSection.submitButton.enable();
+    }
 });
 
 async function filterData (data, age) {
@@ -41,8 +48,7 @@ async function filterData (data, age) {
         // Call TensorFlow model
         let prediction = await predict(data[i].cedula);
         const year = (new Date().getFullYear()) - age;
-        if (year - prediction < 10) 
-            filteredData.push(data[i]);
+        if (year - prediction < 10) filteredData.push(data[i]);
     }
     return filteredData;
 }
