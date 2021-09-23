@@ -11,7 +11,7 @@ import {
 } from './controller.js';    
 
 
-let api = new VacunadosApi('http://localhost:3000/');
+let api = new VacunadosApi('https://api-vacununados.herokuapp.com/');
 api.wakeUp().then(() => {
     idSection.submitButton.enable()
     searchSection.submitButton.enable()
