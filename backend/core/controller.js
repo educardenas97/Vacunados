@@ -2,7 +2,11 @@ const {dao} = require('../database/DAO');
 
 exports.controller = class Controller {
     constructor() {
-        this.dao = new dao(['mongodb://localhost:27017/']);
+        this.dao = new dao([
+            'mongodb+srv://admin:admin@cluster1.clwqv.mongodb.net/vacunados?retryWrites=true&w=majority',
+            'mongodb+srv://cluster2:cluster2@cluster2.pehss.mongodb.net/vacunados?retryWrites=true&w=majority',
+            'mongodb+srv://cluster3:cluster3@cluster3.p51yy.mongodb.net/vacunados?retryWrites=true&w=majority'
+        ]);
     }
 
     async wakeUp() {
