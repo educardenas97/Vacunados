@@ -2,6 +2,9 @@ import { HeaderButton, SubmitButton } from "../components/Button.js";
 import { Section } from "../components/Section.js";
 import { eventSectionClick } from "../events/sectionClick.js";
 
+function removeAccents (str) {
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+} 
 
 function loadElements(sectionName, headerButtonName, submitButtonName) {
     const sectionElement = document.getElementById(sectionName);
@@ -34,8 +37,8 @@ function loadElements(sectionName, headerButtonName, submitButtonName) {
 export function loadSearchForm(){
     const searchForm = document.forms["searchForm"];
     let data = {
-        "nombre": searchForm["name"].value,
-        "apellido": searchForm["last_name"].value,
+        "nombre": removeAccents(searchForm["name"].value),
+        "apellido": removeAccents(searchForm["last_name"].value),
         "isFirstName": searchForm["isFirstName"].checked,
         "isLastName": searchForm["isFirstLastName"].checked,
         "age": searchForm["age"].value
