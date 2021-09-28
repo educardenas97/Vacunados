@@ -9,6 +9,11 @@ exports.controller = class Controller {
         ]);
     }
 
+
+    /**
+    * @param none
+    * @returns {Promise|Array}
+    */
     async wakeUp() {
         try {
             return await this.dao.connect();
@@ -18,35 +23,50 @@ exports.controller = class Controller {
         }
     }
 
-    async getDocument(cedula) {
+
+    /**
+     * @param {number} id
+     * @returns {Promise|Array}
+     * @throws {Error}
+    */
+    async getDocument(id) {
         try {
-            let ci = Number(cedula);
+            let ci = Number(id);
             return await this.dao.findDocument(ci);
         } catch (error) {
             console.error(error);
+            return error;
         }
     }
 
-    async searchDocument(nombre, apellido, isFirstName=true, isLastName=true) {
+    
+    /**
+     * @param {string} name
+     * @param {string} lastName
+     * @param {boolean} isFirstName
+     * @param {boolean} isLastName
+     * @returns {Promise|Array}
+    */
+    async searchDocument(name, lastName, isFirstName=true, isLastName=true) {
         if (isFirstName && isLastName) {
             return await this.dao.findDocuments(
-                '^' + nombre.toUpperCase(),
-                '^' + apellido.toUpperCase()
+                '^' + name.toUpperCase(),
+                '^' + lastName.toUpperCase()
                 );
         }else if (isFirstName && !isLastName) {
             return await this.dao.findDocuments(
-                '^' + nombre.toUpperCase(),
-                apellido.toUpperCase()
+                '^' + name.toUpperCase(),
+                lastName.toUpperCase()
             );
         }else if (!isFirstName && isLastName) {
             return await this.dao.findDocuments(
-                nombre.toUpperCase(),
-                '^' + apellido.toUpperCase()
+                name.toUpperCase(),
+                '^' + lastName.toUpperCase()
             );
         } else {
             return await this.dao.findDocuments(
-                nombre.toUpperCase(),
-                apellido.toUpperCase()
+                name.toUpperCase(),
+                lastName.toUpperCase()
             );
         }
     }
