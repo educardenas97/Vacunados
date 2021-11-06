@@ -5,7 +5,8 @@ exports.controller = class Controller {
         this.dao = new dao([
             'mongodb+srv://admin:admin@cluster1.clwqv.mongodb.net/vacunados?retryWrites=true&w=majority',
             'mongodb+srv://cluster2:cluster2@cluster2.pehss.mongodb.net/vacunados?retryWrites=true&w=majority',
-            'mongodb+srv://cluster3:cluster3@cluster3.p51yy.mongodb.net/vacunados?retryWrites=true&w=majority'
+            'mongodb+srv://cluster3:cluster3@cluster3.p51yy.mongodb.net/vacunados?retryWrites=true&w=majority',
+            'mongodb+srv://cluster4:LXHs2fCvsvAWYBqm@cluster4.veqxo.mongodb.net/vacunados?retryWrites=true&w=majority'
         ]);
     }
 

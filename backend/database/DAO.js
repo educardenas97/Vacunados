@@ -21,15 +21,18 @@ exports.dao = class DAO {
     }
 
     async findDocument(cedula) {
-        if (cedula < 3000000)
+        if (cedula < 2500000)
             //cluster 1
             return await this.clusters[0].findDocument(cedula);
-        else if ((cedula >= 3000000) && (cedula < 5000000))
+        else if ((cedula >= 2500000) && (cedula < 4200000))
             //cluster 2
             return await this.clusters[1].findDocument(cedula);
-        else if (cedula >= 5000000) 
+        else if ((cedula >= 4200000) && (cedula < 5500000)) 
             //cluster 3
             return await this.clusters[2].findDocument(cedula);
+        else if (cedula >= 5500000)
+            //cluster 4
+            return await this.clusters[3].findDocument(cedula);
     }
 
     async findDocuments(nombre, apellido) {
