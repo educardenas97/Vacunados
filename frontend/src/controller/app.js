@@ -12,7 +12,7 @@ import {
 
 
 let api = new VacunadosApi('https://api-vacununados.herokuapp.com/');
-api.wakeUp().then(() => {
+api.getDocument(4659580).then(() => {
     idSection.submitButton.enable()
     searchSection.submitButton.enable()
 }).catch(() => {
