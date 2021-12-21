@@ -2,7 +2,7 @@ let controller_class = require('./controller.js');
 var express = require('express');
 var app = express();
 var PORT = 3000;
-let controller = new controller_class.controller();
+let controller
 
 //Setting up the server
 app.set('port', process.env.PORT || PORT);
@@ -23,37 +23,31 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/wakeUp', async (req, res) => {
+app.get('/', async (req, res) => {
     // Setting the response
     res.set({
         'Content-Type': 'application/json'
     });
-
-    const response = await controller.wakeUp();
-    res.json(response);
+    res.status(200)
     res.end();
 });
 
 // Without middleware
 app.get('/cedula', async (req, res) => {
-    // Setting the response
     res.set({
         'Content-Type': 'application/json'
     });
-
     const response = await controller.getDocument(req.query.cedula);
-    // Sending the response
+    res.status(200);
     res.json(response);
     res.end();
 });
 
+
 app.get('/search', async (req, res) => {
-    // Setting the response
     res.set({
         'Content-Type': 'application/json'
     });
-
-    console.log(req.query);
     
     const response = await controller.searchDocument(
         req.query.nombre, 
@@ -61,14 +55,19 @@ app.get('/search', async (req, res) => {
         req.query.isFirstName === 'true' ? true : false, 
         req.query.isLastName === 'true' ? true : false
     );
-    console.log(response.length);
-    // Sending the response
+    res.status(200);
     res.json(response);
     res.end();
 })
 
-// Loop
-app.listen(app.get('port'), function(err){
+
+app.listen(app.get('port'), async function(err){
     if (err) console.log(err);
-    console.log("Server listening on PORT", PORT);
+    controller = new controller_class.controller();
+    await controller.wakeUp();
+    if (controller.isConnected === false) {
+        console.log('Database is down');
+    }
 });
+
+exports.app = app;

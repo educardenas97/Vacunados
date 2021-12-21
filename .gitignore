@@ -1,4 +1,4 @@
-backend/node_modules
+node_modules
 frontend/elements.html
 script/vacunados.csv
 script/__pycache__

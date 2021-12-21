@@ -2,6 +2,7 @@ const {dao} = require('../database/DAO');
 
 exports.controller = class Controller {
     constructor() {
+        this.isConnected = false;
         this.dao = new dao([
             'mongodb+srv://admin:admin@cluster1.clwqv.mongodb.net/vacunados?retryWrites=true&w=majority',
             'mongodb+srv://cluster2:cluster2@cluster2.pehss.mongodb.net/vacunados?retryWrites=true&w=majority',
@@ -17,7 +18,10 @@ exports.controller = class Controller {
     */
     async wakeUp() {
         try {
-            return await this.dao.connect();
+            if (!this.isConnected) {
+                await this.dao.connect();
+                this.isConnected = true;
+            }
         } catch (error) {
             console.error(error);
             throw error;
@@ -32,6 +36,9 @@ exports.controller = class Controller {
     */
     async getDocument(id) {
         try {
+            if (!this.isConnected) {
+                await this.dao.connect();
+            }
             let ci = Number(id);
             return await this.dao.findDocument(ci);
         } catch (error) {
@@ -49,6 +56,9 @@ exports.controller = class Controller {
      * @returns {Promise|Array}
     */
     async searchDocument(name, lastName, isFirstName=true, isLastName=true) {
+        if (!this.isConnected) {
+            await this.dao.connect();
+        }
         if (isFirstName && isLastName) {
             return await this.dao.findDocuments(
                 '^' + name.toUpperCase(),
