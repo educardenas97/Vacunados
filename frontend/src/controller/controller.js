@@ -37,8 +37,8 @@ function loadElements(sectionName, headerButtonName, submitButtonName) {
 export function loadSearchForm(){
     const searchForm = document.forms["searchForm"];
     let data = {
-        "nombre": removeAccents(searchForm["name"].value),
-        "apellido": removeAccents(searchForm["last_name"].value),
+        "name": removeAccents(searchForm["name"].value),
+        "lastName": removeAccents(searchForm["last_name"].value),
         "isFirstName": searchForm["isFirstName"].checked,
         "isLastName": searchForm["isFirstLastName"].checked,
         "age": searchForm["age"].value

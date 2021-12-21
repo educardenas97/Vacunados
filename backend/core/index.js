@@ -10,16 +10,10 @@ app.set('port', process.env.PORT || PORT);
 
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    // website you wish to  allow to connet    
     res.setHeader('Access-Control-Allow-Origin','https://educardenas97.github.io');
-    // request method you wish to allow
     res.setHeader('Access-Control-Allow-Methods','GET, POST, OPTION, PUT, PATCH');
-    // request headers you wish to allow 
     res.setHeader('Access-Control-Allow-Headers','X-Requested-With,content-type,Authorization');   
-    // set to true if you need the website to include  cookies  in the  request  sent 
-    // to the API (eg. in case you can see sessions )
     res.setHeader('Access-Control-Allow-Credentials','false');
-    // pass to the next layer of middleware
     next();
 });
 
@@ -50,11 +44,12 @@ app.get('/search', async (req, res) => {
     });
     
     const response = await controller.searchDocument(
-        req.query.nombre, 
-        req.query.apellido, 
+        req.query.name, 
+        req.query.lastName, 
         req.query.isFirstName === 'true' ? true : false, 
         req.query.isLastName === 'true' ? true : false
     );
+
     res.status(200);
     res.json(response);
     res.end();
