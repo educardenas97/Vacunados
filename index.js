@@ -18,7 +18,6 @@ app.use(function (req, res, next) {
 });
 
 app.get('/', async (req, res) => {
-    // Setting the response
     res.set({
         'Content-Type': 'application/json'
     });
@@ -26,7 +25,6 @@ app.get('/', async (req, res) => {
     res.end();
 });
 
-// Without middleware
 app.get('/cedula', async (req, res) => {
     res.set({
         'Content-Type': 'application/json'
